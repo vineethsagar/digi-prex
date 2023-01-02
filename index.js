@@ -8,8 +8,10 @@ const LMS = require('./log-model')
 const config = require("./config");
 const {scheduleJobHandler , addLog} = require('./jobs')
 const scheduleConfig = require('./scheduleConfig')
+var cors = require('cors')
 const router = express();
 
+router.use(cors())
 // ! connect to mongodb
 mongoose
   .connect(config.mongo.url, {
