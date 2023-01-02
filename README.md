@@ -4,8 +4,9 @@ Note : You need to have Node installed
 
 1. Goto the project folder location
 2. Open Command Prompt
-3. type `nodemon` and enter  
-4. The server will be started at 3000 port
+3. type `npm install` and enter
+4. type `nodemon` and enter  
+5. The server will be started at 3000 port
 
 There are 3 Routes
 
