@@ -4,8 +4,9 @@ const mongoose = require("mongoose");
 const moment = require('moment')
 const schedule = require('node-schedule');
 const ACS = require('./model')
+const LMS = require('./log-model')
 const config = require("./config");
-const {scheduleJobHandler} = require('./jobs')
+const {scheduleJobHandler , addLog} = require('./jobs')
 const scheduleConfig = require('./scheduleConfig')
 const router = express();
 
@@ -68,6 +69,12 @@ const orderPlaced = async (req, res, next) => {
 }
 };
 
+const sendLogs = async (req, res, next)=>{
+  return LMS.find()
+  .then((data) => res.status(200).json({ data }))
+  .catch((error) => res.status(400).json({ error }));
+}
+
 //! start server if mongodb connection is successfully
 
 const startServer = () => {
@@ -91,6 +98,8 @@ const startServer = () => {
   router.post("/abandoned-checkout", abandonedCardHandler);
 
   router.patch("/order-placed/:checkoutId", orderPlaced);
+
+  router.get("/logs",sendLogs )
 
   // ! API rules
   router.use((req, res, next) => {
